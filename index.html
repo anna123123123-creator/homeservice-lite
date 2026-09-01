@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家政服务预约系统（精简开源版）</title>
+<meta name="description" content="免费开源的家政服务预约管理系统精简版：服务人员浏览、在线预约、忙碌时段查询、后台人员与订单管理，真实增删改查功能，纯前端+localStorage实现，可作为学习或二次开发起点。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">家政<span class="accent">无忧</span></div>
+    <a href="admin.html" class="nav-link">进入商家后台 →</a>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <h1>预约靠谱的家政服务人员</h1>
+      <p>点击服务人员查看简介和已确认的忙碌时段，选好时间直接在线提交预约申请。这是一个真实可用的精简开源系统，数据保存在你浏览器本地。</p>
+    </div>
+    <div id="staffGrid" class="staff-grid"></div>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <button class="modal-close" id="btnCloseModal">&times;</button>
+      <h2 id="modalStaffName"></h2>
+      <p class="sub" id="modalStaffMeta"></p>
+      <div class="booked-ranges" id="busySlots"></div>
+      <div id="modalMsg"></div>
+      <form id="bookingForm" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label>姓名</label>
+            <input id="customerNameInput" type="text" required placeholder="用于联系你的姓名">
+          </div>
+          <div class="field">
+            <label>手机号</label>
+            <input id="phoneInput" type="text" required placeholder="用于联系你的手机号">
+          </div>
+        </div>
+        <div class="field">
+          <label>服务日期</label>
+          <input id="dateInput" type="date" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>开始时间</label>
+            <input id="startTimeInput" type="time" required>
+          </div>
+          <div class="field">
+            <label>结束时间</label>
+            <input id="endTimeInput" type="time" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>服务地址</label>
+          <input id="addressInput" type="text" required placeholder="上门服务地址">
+        </div>
+        <div class="field">
+          <label>备注（选填）</label>
+          <textarea id="notesInput" rows="2" placeholder="特殊需求，例如宠物、老人身体状况等"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">提交预约申请</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

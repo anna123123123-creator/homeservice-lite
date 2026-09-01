@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商家后台 · 家政服务预约系统（精简开源版）</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <div class="brand">家政<span class="accent">无忧</span> 后台</div>
+      <div class="side-link active" data-view="dashboard">仪表盘</div>
+      <div class="side-link" data-view="staff">服务人员管理</div>
+      <div class="side-link" data-view="bookings">订单管理</div>
+      <div class="side-link" id="btnResetData" style="margin-top:20px;color:var(--red)">重置示例数据</div>
+      <a href="index.html" class="side-link">← 返回前台</a>
+    </aside>
+
+    <main class="admin-main">
+      <section id="view-dashboard" class="admin-view active">
+        <div class="page-head"><h1>仪表盘</h1><p>服务人员与订单概览。</p></div>
+        <div class="stat-grid" id="statGrid"></div>
+        <table>
+          <thead><tr><th>最新订单</th><th>服务人员</th><th>服务日期</th><th>状态</th></tr></thead>
+          <tbody id="recentBookingsBody"></tbody>
+        </table>
+      </section>
+
+      <section id="view-staff" class="admin-view">
+        <div class="page-head"><h1>服务人员管理</h1><p>添加、编辑或删除服务人员。</p></div>
+        <div class="table-toolbar">
+          <span></span>
+          <button class="btn btn-primary btn-sm" id="btnAddStaff">+ 新增人员</button>
+        </div>
+        <table>
+          <thead><tr><th>姓名</th><th>服务类型</th><th>时薪</th><th>技能标签</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody id="staffBody"></tbody>
+        </table>
+      </section>
+
+      <section id="view-bookings" class="admin-view">
+        <div class="page-head"><h1>订单管理</h1><p>确认或取消预约申请。</p></div>
+        <div class="table-toolbar">
+          <div class="filter-row" id="bookingFilters">
+            <button class="filter-btn active" data-status="all">全部</button>
+            <button class="filter-btn" data-status="pending">待确认</button>
+            <button class="filter-btn" data-status="confirmed">已确认</button>
+            <button class="filter-btn" data-status="cancelled">已取消</button>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>服务人员</th><th>客户</th><th>电话</th><th>日期</th><th>时间</th><th>地址</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody id="bookingsBody"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="staffModalBackdrop">
+    <div class="modal">
+      <button class="modal-close" id="btnCloseStaffModal">&times;</button>
+      <h2 id="staffModalTitle">新增服务人员</h2>
+      <div id="staffModalMsg"></div>
+      <form id="staffForm" novalidate>
+        <input type="hidden" id="staffIdInput">
+        <div class="field"><label>姓名</label><input id="staffNameInput" type="text" required></div>
+        <div class="field-row">
+          <div class="field"><label>服务类型</label><input id="staffTypeInput" type="text" required placeholder="例如：保洁 / 月嫂 / 育儿嫂 / 护工"></div>
+          <div class="field"><label>时薪（元）</label><input id="staffRateInput" type="number" min="0" required></div>
+        </div>
+        <div class="field"><label>技能标签（用逗号分隔）</label><input id="staffSkillsInput" type="text" placeholder="例如：深度保洁,收纳整理"></div>
+        <div class="field">
+          <label>状态</label>
+          <select id="staffStatusInput">
+            <option value="available">空闲</option>
+            <option value="busy">较忙</option>
+          </select>
+        </div>
+        <div class="field"><label>简介</label><textarea id="staffBioInput" rows="3"></textarea></div>
+        <button type="submit" class="btn btn-primary btn-block">保存</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
